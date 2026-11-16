@@ -7,10 +7,8 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.decorators import login_required
 
-from .models import PerfilUsuario
-
-
-def registro_usuario(request):
+def registrarView(request):
+    
 
     if request.method == 'POST':
 
@@ -82,7 +80,7 @@ def registro_usuario(request):
 
     return render(request, 'cuentas/registro.html')
 
-def login_usuario(request):
+def loginView(request):
 
     if request.method == 'POST':
 

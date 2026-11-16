@@ -23,4 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('AricaSiempreActiva.urls')),
     path('cuentas/', include('cuentas.urls')),
+    path('admin/', admin.site.urls),
+    path('gremio/', include('panel_gremio.urls')),   
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
