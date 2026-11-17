@@ -69,7 +69,7 @@
    
         {% if user.is_authenticated %}
             <span class="nav-link">
-                Hola, {{ user.first_name|default:user.username }}
+                Hola, {{user.username}}
             </span>
 
             <!-- Botón directo del Panel Gremio para probar -->

@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
+from .forms import PerfilForm
+from .models import Perfil
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
@@ -9,17 +11,8 @@ from django.contrib.auth.decorators import login_required
 from .models import Rol, Perfil
 
 
-def registro_usuario(request):
 
-    if request.method == 'POST':
-
-        username = request.POST.get('username', '').strip()
-        first_name = request.POST.get('first_name', '').strip()
-        last_name = request.POST.get('last_name', '').strip()
-        email = request.POST.get('email', '').strip()
-        password = request.POST.get('password', '')
-        password2 = request.POST.get('password2', '')
-        rol = request.POST.get('rol', '')
+from django.contrib.auth.decorators import login_required
 
         if not username or not email or not password:
             messages.error(request, 'Completa todos los campos obligatorios.')
@@ -78,6 +71,10 @@ def registro_usuario(request):
 def login_usuario(request):
 
     if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Registrado')
+            return redirect('login')
 
         identificador = request.POST.get('username', '').strip()
         password = request.POST.get('password', '')
